@@ -2,7 +2,7 @@ import torch
 from torch._C import dtype
 
 
-class oneHotEncoder(object):
+class OneHotEncoder(object):
     def __init__(self, num_classes):
         self.num_classes = num_classes
 
