@@ -10,7 +10,7 @@ def cross_entropy(input, target):
 
 def distillation_loss(student_softmax, teacher_softmax, ground_truth, weight):
     ce_loss = weight * cross_entropy(student_softmax, teacher_softmax) + (
-        1-weight) * cross_entropy(student_softmax, teacher_softmax)
+        1-weight) * cross_entropy(student_softmax, ground_truth)
     return ce_loss
 
 
