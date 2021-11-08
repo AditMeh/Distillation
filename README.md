@@ -1,10 +1,10 @@
-# Distllation
+# Distillation
 Implementing and experimenting with knowledge distillation 
 
 So far:
 
 - Distillation loss using torch 1.10 soft-label cross-entropy loss (Kullback-Leibler is the next best option)
-- Teacher and student models setup
+- Teacher and student models setup, along with their respective training loops
 - Visualization is bare bones
 
 
