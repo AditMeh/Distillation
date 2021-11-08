@@ -1,8 +1,9 @@
 from models.teacher_mnist import TeacherNetMnist
 from models.student_mnist import StudentNetMnist
 from dataloader import create_dataloaders_mnist, create_onehot_dataloaders_mnist
-from distiller import distillation_loss, cross_entropy
-from utils import StatsTracker
+from distiller import distillation_loss
+from utils import StatsTracker, create_parser_train_student, count_parameters, EarlyStopping
+from visualization import plot_train_graph
 
 import torch
 import torch.nn.functional as F
@@ -16,8 +17,10 @@ import argparse
 
 def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epochs, train_loader, val_loader, device, batch_size=32):
     optimizer = Adam(params=student_net.parameters(), lr=lr)
-    ce_torch_loss = CrossEntropyLoss(reduce="mean")
+
     statsTracker = StatsTracker()
+    earlyStopping = EarlyStopping(patience=4, delta=0.0)
+
     scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, verbose=True)
     for epoch in range(1, epochs + 1):
         statsTracker.reset()
@@ -30,17 +33,18 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
 
             with torch.no_grad():
                 teacher_logits = teacher_net(x)
-                softmax_teacher = F.softmax(
-                    teacher_logits/T, dim=1)
+                teacher_logits_T = teacher_logits/T
+                softmax_teacher = F.softmax(teacher_logits_T, dim=1)
 
-            softmax_student = F.softmax(student_logits/T, dim=1)
-            loss = distillation_loss(
-                softmax_student, softmax_teacher, labels, weight)
-
+                student_ce_loss = CrossEntropyLoss(
+                    reduction="mean")(student_logits, labels)
+            student_logits_T = student_logits/T
+            DL_loss = distillation_loss(
+                student_logits, softmax_teacher, labels, weight)
             optimizer.zero_grad()
-            loss.backward()
+            DL_loss.backward()
             optimizer.step()
-            statsTracker.update_curr_losses(loss.item(), None)
+            statsTracker.update_curr_losses(student_ce_loss.item(), None)
 
         correct = 0
 
@@ -53,8 +57,9 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
 
                 val_softmax_student = F.softmax(val_student_logits, dim=1)
 
-                val_loss = cross_entropy(
+                val_loss = CrossEntropyLoss(reduction="mean")(
                     val_softmax_student, val_labels)
+
                 statsTracker.update_curr_losses(None, val_loss.item())
 
                 matching = torch.eq(torch.argmax(
@@ -72,10 +77,13 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
         statsTracker.update_histories(None, val_loss_epoch)
 
         print('Student_network, Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
-            epoch, train_loss_epoch, val_loss_epoch, val_accuracy))
+            epoch, round(train_loss_epoch, 6), round(val_loss_epoch, 6), round(val_accuracy, 6)))
 
         scheduler.step(val_loss_epoch)
+        earlyStopping(val_loss_epoch, student_net)
 
+        if earlyStopping.stop:
+            break
     if save:
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
@@ -86,30 +94,14 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
 
-    parser.add_argument("-s", "--save", action="store_true", default=False)
-
-    parser.add_argument(
-        "teacher_weights", help="filepath to the weights of the teacher model", type=str)
-    parser.add_argument(
-        "save_dir", help="directory to save the model", type=str)
-
-    parser.add_argument("lr", help="learning rate", type=float)
-
-    parser.add_argument("T", help="softmax temperature", type=float)
-
-    parser.add_argument(
-        "weight", help="weight given to soft target loss term in the distillation loss", type=float)
-
-    parser.add_argument("epochs", help="epochs", type=int)
+    parser = create_parser_train_student()
+    args = parser.parse_args()
 
     device = (torch.device('cuda') if torch.cuda.is_available()
               else torch.device('cpu'))
 
     print(f"Training on device {device}.")
-
-    args = parser.parse_args()
 
     train_dataset, val_dataset = create_onehot_dataloaders_mnist()
     student_network = StudentNetMnist().to(device=device)
@@ -120,5 +112,10 @@ if __name__ == "__main__":
     teacher_network.load_state_dict(torch.load(args.teacher_weights))
     teacher_network = teacher_network.to(device=device)
 
+    print('Student Model: {} params, Teacher Model: {} params'.format(
+        count_parameters(student_network), count_parameters(teacher_network)))
+
     train_history, val_history = distill_model(args.save, args.save_dir, student_network, teacher_network,
                                                args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
+
+    plot_train_graph(val_history, count_parameters(student_network))

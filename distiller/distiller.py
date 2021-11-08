@@ -3,14 +3,20 @@ import torch.nn.functional as F
 import torch
 import numpy as np
 from torch.nn.modules import loss
-
-def cross_entropy(input, target):
-    return (-(target * torch.log(input))).sum() / input.shape[0]
+from torch.nn import CrossEntropyLoss
 
 
-def distillation_loss(student_softmax, teacher_softmax, ground_truth, weight):
-    ce_loss = weight * cross_entropy(student_softmax, teacher_softmax) + (
-        1-weight) * cross_entropy(student_softmax, ground_truth)
-    return ce_loss
+def distillation_loss(student_logits, teacher_softmax, ground_truth_probs, weight):
+    return ((weight * CrossEntropyLoss()(student_logits, teacher_softmax))
+            + (1-weight) * (CrossEntropyLoss()(student_logits, ground_truth_probs)))
 
 
+if __name__ == "__main__":
+    teacher = torch.Tensor(
+        np.array([0.5, 0.01, 0.01, 0.23, 0.25])).unsqueeze(0)
+    student = torch.Tensor(
+        np.array([0.5, 0.01, 0.01, 0.23, 0.25])).unsqueeze(0)
+
+    gt = torch.Tensor([1.0, 0.0, 0.0, 0.0, 0.0])
+
+    print(distillation_loss()(student, teacher))

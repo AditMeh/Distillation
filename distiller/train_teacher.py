@@ -1,23 +1,25 @@
-from torch._C import StringType
-from models.teacher_mnist import TeacherNet
-from models.student_mnist import StudentNet
+from torch.nn.modules.loss import CrossEntropyLoss
+from models.teacher_mnist import TeacherNetMnist
 from dataloader import create_dataloaders_mnist
-from utils import StatsTracker
+from utils import StatsTracker, count_parameters, create_parser_train_teacher, EarlyStopping
 
 import torch
-from torch.nn import CrossEntropyLoss
+from torch.nn.functional import softmax
 from torch.optim import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import tqdm
 import os
-import argparse
+
+from visualization.plot_train_graph import plot_train_graph
 
 
 def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, device, batch_size=32):
     optimizer = Adam(params=net.parameters(), lr=lr)
 
     statsTracker = StatsTracker()
+    earlyStopping = EarlyStopping(patience=7, delta=0.0)
     scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, verbose=True)
+
     for epoch in range(1, epochs + 1):
         statsTracker.reset()
 
@@ -46,7 +48,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
                 statsTracker.update_curr_losses(None, val_loss.item())
 
                 matching = torch.eq(torch.argmax(
-                    val_outputs, dim=1), val_labels)
+                    softmax(val_outputs, dim=1), dim=1), val_labels)
                 correct += torch.sum(matching, dim=0).item()
 
         train_loss_epoch = statsTracker.train_loss_curr / \
@@ -59,40 +61,37 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
 
         statsTracker.update_histories(None, val_loss_epoch)
 
-        print('Teacher_network_Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
-            epoch, train_loss_epoch, val_loss_epoch, val_accuracy))
+        print('Teacher_network: Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
+            epoch, round(train_loss_epoch, 5), round(val_loss_epoch, 5), round(val_accuracy, 5)))
 
         scheduler.step(val_loss_epoch)
+
+        earlyStopping(val_loss_epoch, net)
+
+        if earlyStopping.stop:
+            break
 
     if save:
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
-        torch.save(net.state_dict(), os.path.join(
-            save_dir, 'Teacher_network_val_loss{}_val_accuracy{}'.format(round(val_loss_epoch, 3), round(val_accuracy, 3))))
+        torch.save(earlyStopping.best_model, os.path.join(
+            save_dir, 'Teacher_network_val_loss{}'.format(round(val_loss_epoch, 4))))
 
-    return statsTracker
+    return statsTracker.train_hist, statsTracker.val_hist
 
 
 if __name__ == "__main__":
-    """ This is executed when run from the command line """
-    parser = argparse.ArgumentParser()
 
-    parser.add_argument("-s", "--save", action="store_true", default=False)
-
-    parser.add_argument(
-        "save_dir", help="directory to save the model", type=str)
-
-    parser.add_argument("lr", help="learning rate", type=float)
-
-    parser.add_argument("epochs", help="epochs", type=int)
+    parser = create_parser_train_teacher()
+    args = parser.parse_args()
 
     device = (torch.device('cuda') if torch.cuda.is_available()
               else torch.device('cpu'))
 
     print(f"Training on device {device}.")
 
-    args = parser.parse_args()
-
     train_dataset, val_dataset = create_dataloaders_mnist()
-    train_model(args.save, args.save_dir, TeacherNet().to(
-        device=device), args.lr, args.epochs, train_dataset, val_dataset, device)
+    net = TeacherNetMnist().to(device=device)
+    train_hist, val_hist = train_model(args.save, args.save_dir, net, args.lr,
+                                       args.epochs, train_dataset, val_dataset, device)
+    plot_train_graph(val_hist, count_parameters(net))

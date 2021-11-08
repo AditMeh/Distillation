@@ -1,4 +1,7 @@
+import torch.nn as nn
+import argparse
 import torch
+import copy
 
 
 class OneHotEncoder(object):
@@ -33,3 +36,69 @@ class StatsTracker():
     def reset(self):
         self.train_loss_curr = 0.0
         self.val_loss_curr = 0.0
+
+
+class EarlyStopping:
+    def __init__(self, patience, delta):
+        self.patience = patience
+        self.delta = delta
+        self.best_val_loss = torch.inf
+        self.stop = False
+        self.epoch_counts = 0
+        self.best_model = None
+
+    def __call__(self, val_loss, net):
+
+        if self.best_val_loss > val_loss + self.delta:
+            self.best_val_loss = val_loss
+            self.epoch_counts = 0
+            self.store_model(net)
+
+        else:
+            self.epoch_counts += 1
+
+            if self.epoch_counts == self.patience:
+                self.stop = True
+
+    def store_model(self, net):
+        self.best_model = copy.deepcopy(net.state_dict())
+
+
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def create_parser_train_student():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-s", "--save", action="store_true", default=False)
+
+    parser.add_argument(
+        "teacher_weights", help="filepath to the weights of the teacher model", type=str)
+    parser.add_argument(
+        "save_dir", help="directory to save the model", type=str)
+
+    parser.add_argument("lr", help="learning rate", type=float)
+
+    parser.add_argument("T", help="softmax temperature", type=float)
+
+    parser.add_argument(
+        "weight", help="weight given to soft target loss term in the distillation loss", type=float)
+
+    parser.add_argument("epochs", help="epochs", type=int)
+
+    return parser
+
+
+def create_parser_train_teacher():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-s", "--save", action="store_true", default=False)
+
+    parser.add_argument(
+        "save_dir", help="directory to save the model", type=str)
+
+    parser.add_argument("lr", help="learning rate", type=float)
+
+    parser.add_argument("epochs", help="epochs", type=int)
+    return parser
