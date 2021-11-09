@@ -17,8 +17,8 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
     optimizer = Adam(params=net.parameters(), lr=lr)
 
     statsTracker = StatsTracker()
-    earlyStopping = EarlyStopping(patience=7, delta=0.0)
-    scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, verbose=True)
+    earlyStopping = EarlyStopping(patience=8, delta=0.0)
+    scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, eps=0.0003, verbose=True)
 
     for epoch in range(1, epochs + 1):
         statsTracker.reset()
@@ -28,7 +28,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
 
             x, labels = x.to(device=device), labels.to(device=device)
             outputs = net(x)
-            loss = CrossEntropyLoss(reduce="mean")(outputs, labels)
+            loss = CrossEntropyLoss(reduction="mean")(outputs, labels)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -43,7 +43,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
                     device=device), val_labels.to(device=device)
                 val_outputs = net(val_x)
                 val_loss = CrossEntropyLoss(
-                    reduce="mean")(val_outputs, val_labels)
+                    reduction="mean")(val_outputs, val_labels)
 
                 statsTracker.update_curr_losses(None, val_loss.item())
 
@@ -75,7 +75,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
         torch.save(earlyStopping.best_model, os.path.join(
-            save_dir, 'Teacher_network_val_loss{}'.format(round(val_loss_epoch, 4))))
+            save_dir, 'Teacher_network_val_loss{}'.format(round(val_loss_epoch, 5))))
 
     return statsTracker.train_hist, statsTracker.val_hist
 
@@ -92,6 +92,8 @@ if __name__ == "__main__":
 
     train_dataset, val_dataset = create_dataloaders_mnist()
     net = TeacherNetMnist().to(device=device)
+    
     train_hist, val_hist = train_model(args.save, args.save_dir, net, args.lr,
                                        args.epochs, train_dataset, val_dataset, device)
-    plot_train_graph(val_hist, count_parameters(net))
+    
+    plot_train_graph(train_hist, val_hist, count_parameters(net))

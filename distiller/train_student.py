@@ -118,4 +118,5 @@ if __name__ == "__main__":
     train_history, val_history = distill_model(args.save, args.save_dir, student_network, teacher_network,
                                                args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
 
-    plot_train_graph(val_history, count_parameters(student_network))
+    plot_train_graph(train_history, val_history,
+                     count_parameters(student_network))
