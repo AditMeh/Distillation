@@ -18,12 +18,14 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
 
     statsTracker = StatsTracker()
     earlyStopping = EarlyStopping(patience=8, delta=0.0)
-    scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, eps=0.0003, verbose=True)
+    scheduler = ReduceLROnPlateau(
+        optimizer, 'min', patience=5, eps=0.0003, verbose=True)
 
     for epoch in range(1, epochs + 1):
         statsTracker.reset()
 
         net.train()
+
         for x, labels in tqdm.tqdm(train_loader):
 
             x, labels = x.to(device=device), labels.to(device=device)
@@ -35,7 +37,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
             statsTracker.update_curr_losses(loss.item(), None)
 
         correct = 0
-
+        total = 0
         with torch.no_grad():
             net.eval()
             for val_x, val_labels in tqdm.tqdm(val_loader):
@@ -50,17 +52,16 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
                 matching = torch.eq(torch.argmax(
                     softmax(val_outputs, dim=1), dim=1), val_labels)
                 correct += torch.sum(matching, dim=0).item()
-
+                total += val_x.shape[0]
         train_loss_epoch = statsTracker.train_loss_curr / \
             (batch_size * len(train_loader))
-        val_loss_epoch = statsTracker.val_loss_curr / \
-            (batch_size * len(val_loader))
-        val_accuracy = correct / (len(val_loader) * batch_size)
+        val_loss_epoch = statsTracker.val_loss_curr / (total)
+        val_accuracy = correct / (total)
 
         statsTracker.update_histories(train_loss_epoch, None)
 
         statsTracker.update_histories(None, val_loss_epoch)
-
+        print("correct: " + str(correct) + " out of: " + str(total))
         print('Teacher_network: Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
             epoch, round(train_loss_epoch, 5), round(val_loss_epoch, 5), round(val_accuracy, 5)))
 
@@ -92,8 +93,8 @@ if __name__ == "__main__":
 
     train_dataset, val_dataset = create_dataloaders_mnist()
     net = TeacherNetMnist().to(device=device)
-    
+
     train_hist, val_hist = train_model(args.save, args.save_dir, net, args.lr,
                                        args.epochs, train_dataset, val_dataset, device)
-    
+
     plot_train_graph(train_hist, val_hist, count_parameters(net))

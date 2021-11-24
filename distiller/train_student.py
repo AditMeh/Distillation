@@ -1,14 +1,15 @@
+from matplotlib.pyplot import plot
 from models.teacher_mnist import TeacherNetMnist
 from models.student_mnist import StudentNetMnist
-from dataloader import create_dataloaders_mnist, create_onehot_dataloaders_mnist
+from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 from distiller import distillation_loss
-from utils import StatsTracker, create_parser_train_student, count_parameters, EarlyStopping
-from visualization import plot_train_graph
+from utils import StatsTracker, create_parser_train_student, count_parameters, EarlyStopping, get_classwise_performance_report
+from visualization.plot_train_graph import plot_train_graph
 
 import torch
 import torch.nn.functional as F
 from torch.nn import CrossEntropyLoss
-from torch.optim import Adam
+from torch.optim import Adam, SGD
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import tqdm
 import os
@@ -16,7 +17,7 @@ import argparse
 
 
 def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epochs, train_loader, val_loader, device, batch_size=32):
-    optimizer = Adam(params=student_net.parameters(), lr=lr)
+    optimizer = SGD(params=student_net.parameters(), lr=lr)
 
     statsTracker = StatsTracker()
     earlyStopping = EarlyStopping(patience=4, delta=0.0)
@@ -33,14 +34,10 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
 
             with torch.no_grad():
                 teacher_logits = teacher_net(x)
-                teacher_logits_T = teacher_logits/T
-                softmax_teacher = F.softmax(teacher_logits_T, dim=1)
-
                 student_ce_loss = CrossEntropyLoss(
                     reduction="mean")(student_logits, labels)
-            student_logits_T = student_logits/T
             DL_loss = distillation_loss(
-                student_logits, softmax_teacher, labels, weight)
+                student_logits, T, teacher_logits, labels, weight)
             optimizer.zero_grad()
             DL_loss.backward()
             optimizer.step()
@@ -63,7 +60,7 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
                 statsTracker.update_curr_losses(None, val_loss.item())
 
                 matching = torch.eq(torch.argmax(
-                    val_softmax_student, dim=1), torch.argmax(val_labels, dim=1))
+                    val_softmax_student, dim=1), val_labels)
                 correct += torch.sum(matching, dim=0).item()
 
         train_loss_epoch = statsTracker.train_loss_curr / \
@@ -87,9 +84,8 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
     if save:
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
-        torch.save(student_net.state_dict(), os.path.join(
-            save_dir, 'Student_network_val_loss{}_val_accuracy{}'.format(round(val_loss_epoch, 3), round(val_accuracy, 3))))
-
+        torch.save(earlyStopping.best_model, os.path.join(
+            save_dir, 'Student_network_val_loss{}'.format(round(val_loss_epoch, 5))))
     return statsTracker.train_hist, statsTracker.val_hist
 
 
@@ -103,8 +99,15 @@ if __name__ == "__main__":
 
     print(f"Training on device {device}.")
 
-    train_dataset, val_dataset = create_onehot_dataloaders_mnist()
+    train_dataset = torch.load("data/MNIST/processed/training.pt")
+    val_dataset = torch.load("data/MNIST/processed/test.pt")
+    classwise_dict_train = generate_mnist_classwise_dict(train_dataset)
+    classwise_dict_val = generate_mnist_classwise_dict(val_dataset)
+
     student_network = StudentNetMnist().to(device=device)
+
+    train_dataset, val_dataset = create_dataloaders_mnist(
+        classwise_dict_train, classwise_dict_val, args.classes)
 
     # Loading the teacher network
     teacher_network = TeacherNetMnist()
@@ -118,5 +121,9 @@ if __name__ == "__main__":
     train_history, val_history = distill_model(args.save, args.save_dir, student_network, teacher_network,
                                                args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
 
+    report = get_classwise_performance_report(
+        student_network, classwise_dict_val, device=device)
+    import pprint
+    pprint.pprint(report)
     plot_train_graph(train_history, val_history,
                      count_parameters(student_network))

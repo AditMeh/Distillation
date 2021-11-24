@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
-from torch._C import Size
 
 
 def plot_train_graph(train_history, val_history, num_params):
-
+    plt.title(label="Model with {} params".format(num_params))
     plt.plot([i+1 for i in range(len(train_history))],
              train_history, label="train loss")
     plt.plot([i+1 for i in range(len(val_history))],

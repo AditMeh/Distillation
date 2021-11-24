@@ -1,6 +1,7 @@
 import argparse
 import torch
 import copy
+import torch.nn.functional as F
 
 
 class OneHotEncoder(object):
@@ -67,6 +68,25 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
+def get_classwise_performance_report(model, classwise_dict, device):
+
+    performance_dict = {}
+
+    for c in classwise_dict:
+        curr_dataset = torch.Tensor(classwise_dict[c]).to(device=device)
+        curr_labels = (torch.ones(size=(len(curr_dataset)))
+                       * c).to(device=device)
+        with torch.no_grad():
+            model.eval()
+            val_student_logits = model(curr_dataset)
+            val_softmax_student = F.softmax(val_student_logits, dim=1)
+            matching = torch.eq(torch.argmax(
+                val_softmax_student, dim=1), curr_labels)
+            performance_dict[c] = torch.sum(
+                matching, dim=0).item()/len(matching)
+    return performance_dict
+
+
 def create_parser_train_student():
     parser = argparse.ArgumentParser()
 
@@ -80,6 +100,9 @@ def create_parser_train_student():
     parser.add_argument("lr", help="learning rate", type=float)
 
     parser.add_argument("T", help="softmax temperature", type=float)
+
+    parser.add_argument("classes", default=[
+                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9], nargs="?", help="classes to train the network on", type=list)
 
     parser.add_argument(
         "weight", help="weight given to soft target loss term in the distillation loss", type=float)
