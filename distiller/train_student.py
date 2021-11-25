@@ -20,9 +20,9 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
     optimizer = SGD(params=student_net.parameters(), lr=lr)
 
     statsTracker = StatsTracker()
-    earlyStopping = EarlyStopping(patience=4, delta=0.0)
+    earlyStopping = EarlyStopping(patience=6, delta=0.0)
 
-    scheduler = ReduceLROnPlateau(optimizer, 'min', patience=5, verbose=True)
+    scheduler = ReduceLROnPlateau(optimizer, 'min', patience=4, verbose=True)
     for epoch in range(1, epochs + 1):
         statsTracker.reset()
 
@@ -107,12 +107,12 @@ if __name__ == "__main__":
     student_network = StudentNetMnist().to(device=device)
 
     train_dataset, val_dataset = create_dataloaders_mnist(
-        classwise_dict_train, classwise_dict_val, args.classes)
+        classwise_dict_train, classwise_dict_val, [i for i in range(args.classes + 1)])
 
     # Loading the teacher network
     teacher_network = TeacherNetMnist()
     checkpoint = torch.load(args.teacher_weights)
-    teacher_network.load_state_dict(torch.load(args.teacher_weights))
+    teacher_network.load_state_dict(checkpoint)
     teacher_network = teacher_network.to(device=device)
 
     print('Student Model: {} params, Teacher Model: {} params'.format(
