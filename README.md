@@ -15,6 +15,7 @@ To do:
 - Abalation tests for performance with and without soft labels at different temperature values.
 - Test implicit learning from soft labels 
 - Mathematically prove that minimizing the logsoftmax -> CE (torch) for soft labels is equivalent to bringing the softmax as close to the true soft-label distribution as possible (for my own understanding)
+- Derive dC/dz for CE on softmax with temperature
 
 
 Remember to clean up all the if __name__ == "__main__" when done. 
