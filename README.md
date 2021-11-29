@@ -18,4 +18,3 @@ To do:
 - Derive dC/dz for CE on softmax with temperature
 
 
-Remember to clean up all the if __name__ == "__main__" when done. 
