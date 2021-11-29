@@ -2,7 +2,7 @@ import json
 from models.student_mnist import StudentNetMnist
 from models.teacher_mnist import TeacherNetMnist
 
-from utils import create_parser_grid_search
+from utils import create_parser_grid_search, get_classwise_performance_report
 from train_student import distill_model
 from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 import torch
@@ -22,7 +22,7 @@ class HyperParamSearch:
         train_history, val_history = distill_model(
             False, "weights/", student_network, teacher_network, lr, T, weight, epochs, train_dataset, val_dataset, device)
 
-        return val_history[-1]
+        return val_history[-1], student_network
 
     def run_grid_search(self):
         results = {}
@@ -48,12 +48,19 @@ class HyperParamSearch:
             train_dataset, val_dataset = create_dataloaders_mnist(
                 classwise_dict_train, classwise_dict_val, [i for i in range(hparams["classes"] + 1)])
 
-            val_loss_final = self.run_single_search(
+            val_loss_final, model = self.run_single_search(
                 hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"],
                 teacher_network, device, train_dataset, val_dataset)
 
-            results["lr: {}, epochs: {}, T: {}, weight: {}".format(
-                hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"])] = val_loss_final
+            experiment_name = "lr: {}, epochs: {}, T: {}, weight: {}".format(
+                hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"])
+
+            results[experiment_name + "val loss"] = round(val_loss_final, 5)
+
+            performance_report = get_classwise_performance_report(
+                model, classwise_dict_val, device)
+            results[experiment_name + "classwise_performance"] = {
+                round(performance_report[x], 5) for x in performance_report}
 
         return results
 
