@@ -55,12 +55,14 @@ class HyperParamSearch:
             experiment_name = "lr: {}, epochs: {}, T: {}, weight: {}".format(
                 hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"])
 
-            results[experiment_name + "val loss"] = round(val_loss_final, 5)
+            results[experiment_name + " val loss"] = round(val_loss_final, 5)
 
             performance_report = get_classwise_performance_report(
                 model, classwise_dict_val, device)
-            results[experiment_name + "classwise_performance"] = {
-                round(performance_report[x], 5) for x in performance_report}
+
+            print(performance_report)
+            results[experiment_name + " classwise_performance"] = {
+                x: round(performance_report[x], 5) for x in performance_report.keys()}
 
         return results
 
