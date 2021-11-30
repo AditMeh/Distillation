@@ -1,0 +1,468 @@
+Training on device cuda.
+Student_network, Epoch 1, Train Loss 0.044632, Val Loss 0.050711, Val Accuracy 0.838059
+0
+Student_network, Epoch 2, Train Loss 0.042155, Val Loss 0.050174, Val Accuracy 0.855431
+0
+Student_network, Epoch 3, Train Loss 0.040544, Val Loss 0.049974, Val Accuracy 0.860923
+0
+Student_network, Epoch 4, Train Loss 0.040134, Val Loss 0.049931, Val Accuracy 0.86242
+0
+Student_network, Epoch 5, Train Loss 0.03989, Val Loss 0.049715, Val Accuracy 0.86881
+0
+Student_network, Epoch 6, Train Loss 0.039264, Val Loss 0.049696, Val Accuracy 0.869708
+0
+Student_network, Epoch 7, Train Loss 0.03917, Val Loss 0.049691, Val Accuracy 0.870807
+0
+Student_network, Epoch 8, Train Loss 0.039123, Val Loss 0.049635, Val Accuracy 0.871605
+0
+Student_network, Epoch 9, Train Loss 0.039032, Val Loss 0.049722, Val Accuracy 0.869209
+0
+Student_network, Epoch 10, Train Loss 0.038792, Val Loss 0.049618, Val Accuracy 0.872304
+1
+Student_network, Epoch 11, Train Loss 0.038601, Val Loss 0.049551, Val Accuracy 0.874401
+0
+Student_network, Epoch 12, Train Loss 0.038585, Val Loss 0.049542, Val Accuracy 0.874301
+0
+Student_network, Epoch 13, Train Loss 0.038445, Val Loss 0.049589, Val Accuracy 0.873403
+0
+Student_network, Epoch 14, Train Loss 0.038614, Val Loss 0.049589, Val Accuracy 0.872804
+1
+Student_network, Epoch 15, Train Loss 0.038429, Val Loss 0.049647, Val Accuracy 0.871306
+2
+Student_network, Epoch 16, Train Loss 0.038558, Val Loss 0.049541, Val Accuracy 0.874002
+3
+Student_network, Epoch 17, Train Loss 0.038567, Val Loss 0.049598, Val Accuracy 0.872504
+Epoch    17: reducing learning rate of group 0 to 1.0000e-03.
+0
+Student_network, Epoch 18, Train Loss 0.03832, Val Loss 0.049558, Val Accuracy 0.873502
+1
+Student_network, Epoch 19, Train Loss 0.038129, Val Loss 0.049554, Val Accuracy 0.874002
+2
+Student_network, Epoch 20, Train Loss 0.038181, Val Loss 0.049553, Val Accuracy 0.874002
+3
+Student_network, Epoch 21, Train Loss 0.038196, Val Loss 0.049567, Val Accuracy 0.873602
+4
+Student_network, Epoch 22, Train Loss 0.038232, Val Loss 0.049571, Val Accuracy 0.873502
+Epoch    22: reducing learning rate of group 0 to 1.0000e-04.
+5
+Student_network, Epoch 1, Train Loss 0.041891, Val Loss 0.050218, Val Accuracy 0.855232
+0
+Student_network, Epoch 2, Train Loss 0.039157, Val Loss 0.049864, Val Accuracy 0.863918
+0
+Student_network, Epoch 3, Train Loss 0.037954, Val Loss 0.049589, Val Accuracy 0.873602
+0
+Student_network, Epoch 4, Train Loss 0.037373, Val Loss 0.049543, Val Accuracy 0.875499
+0
+Student_network, Epoch 5, Train Loss 0.036863, Val Loss 0.049539, Val Accuracy 0.8748
+0
+Student_network, Epoch 6, Train Loss 0.036585, Val Loss 0.0494, Val Accuracy 0.879692
+0
+Student_network, Epoch 7, Train Loss 0.036516, Val Loss 0.049422, Val Accuracy 0.877696
+0
+Student_network, Epoch 8, Train Loss 0.036147, Val Loss 0.049324, Val Accuracy 0.881889
+1
+Student_network, Epoch 9, Train Loss 0.035949, Val Loss 0.049316, Val Accuracy 0.881589
+0
+Student_network, Epoch 10, Train Loss 0.035872, Val Loss 0.04932, Val Accuracy 0.88119
+0
+Student_network, Epoch 11, Train Loss 0.035841, Val Loss 0.049323, Val Accuracy 0.882188
+1
+Student_network, Epoch 12, Train Loss 0.035685, Val Loss 0.049344, Val Accuracy 0.88129
+2
+Student_network, Epoch 13, Train Loss 0.035609, Val Loss 0.049321, Val Accuracy 0.881589
+3
+Student_network, Epoch 14, Train Loss 0.035551, Val Loss 0.049266, Val Accuracy 0.885184
+4
+Student_network, Epoch 15, Train Loss 0.035543, Val Loss 0.049271, Val Accuracy 0.884585
+0
+Student_network, Epoch 16, Train Loss 0.035399, Val Loss 0.049335, Val Accuracy 0.881589
+1
+Student_network, Epoch 17, Train Loss 0.035574, Val Loss 0.049255, Val Accuracy 0.883786
+2
+Student_network, Epoch 18, Train Loss 0.03537, Val Loss 0.049266, Val Accuracy 0.884185
+0
+Student_network, Epoch 19, Train Loss 0.035272, Val Loss 0.049279, Val Accuracy 0.883387
+1
+Student_network, Epoch 20, Train Loss 0.035113, Val Loss 0.04931, Val Accuracy 0.881789
+2
+Student_network, Epoch 21, Train Loss 0.0353, Val Loss 0.049203, Val Accuracy 0.886182
+3
+Student_network, Epoch 22, Train Loss 0.035189, Val Loss 0.049257, Val Accuracy 0.884085
+0
+Student_network, Epoch 23, Train Loss 0.035269, Val Loss 0.04923, Val Accuracy 0.885084
+1
+Student_network, Epoch 24, Train Loss 0.035209, Val Loss 0.049258, Val Accuracy 0.883886
+2
+Student_network, Epoch 25, Train Loss 0.035242, Val Loss 0.049171, Val Accuracy 0.886182
+3
+Student_network, Epoch 26, Train Loss 0.035223, Val Loss 0.049237, Val Accuracy 0.884884
+0
+Student_network, Epoch 27, Train Loss 0.035201, Val Loss 0.049232, Val Accuracy 0.885184
+1
+Student_network, Epoch 28, Train Loss 0.035191, Val Loss 0.049217, Val Accuracy 0.885883
+2
+Student_network, Epoch 29, Train Loss 0.035217, Val Loss 0.049189, Val Accuracy 0.886382
+3
+Student_network, Epoch 30, Train Loss 0.035134, Val Loss 0.049207, Val Accuracy 0.885184
+Epoch    30: reducing learning rate of group 0 to 1.0000e-03.
+4
+Student_network, Epoch 31, Train Loss 0.034949, Val Loss 0.049218, Val Accuracy 0.885783
+5
+Student_network, Epoch 1, Train Loss 0.022493, Val Loss 0.049518, Val Accuracy 0.880391
+0
+Student_network, Epoch 2, Train Loss 0.022263, Val Loss 0.049053, Val Accuracy 0.893271
+0
+Student_network, Epoch 3, Train Loss 0.021911, Val Loss 0.048805, Val Accuracy 0.898562
+0
+Student_network, Epoch 4, Train Loss 0.021568, Val Loss 0.048701, Val Accuracy 0.904054
+0
+Student_network, Epoch 5, Train Loss 0.021227, Val Loss 0.048618, Val Accuracy 0.90595
+0
+Student_network, Epoch 6, Train Loss 0.021013, Val Loss 0.04854, Val Accuracy 0.909345
+0
+Student_network, Epoch 7, Train Loss 0.020816, Val Loss 0.048478, Val Accuracy 0.911042
+0
+Student_network, Epoch 8, Train Loss 0.020651, Val Loss 0.048432, Val Accuracy 0.91264
+0
+Student_network, Epoch 9, Train Loss 0.020502, Val Loss 0.048412, Val Accuracy 0.91224
+0
+Student_network, Epoch 10, Train Loss 0.020387, Val Loss 0.048391, Val Accuracy 0.913239
+0
+Student_network, Epoch 11, Train Loss 0.020268, Val Loss 0.048375, Val Accuracy 0.914337
+0
+Student_network, Epoch 12, Train Loss 0.020224, Val Loss 0.048339, Val Accuracy 0.915435
+0
+Student_network, Epoch 13, Train Loss 0.020122, Val Loss 0.048337, Val Accuracy 0.915835
+0
+Student_network, Epoch 14, Train Loss 0.020101, Val Loss 0.048342, Val Accuracy 0.915435
+0
+Student_network, Epoch 15, Train Loss 0.020013, Val Loss 0.048306, Val Accuracy 0.915935
+1
+Student_network, Epoch 16, Train Loss 0.019888, Val Loss 0.048307, Val Accuracy 0.916034
+0
+Student_network, Epoch 17, Train Loss 0.019908, Val Loss 0.048304, Val Accuracy 0.916134
+1
+Student_network, Epoch 18, Train Loss 0.019822, Val Loss 0.048264, Val Accuracy 0.917632
+0
+Student_network, Epoch 19, Train Loss 0.019808, Val Loss 0.048268, Val Accuracy 0.917732
+0
+Student_network, Epoch 20, Train Loss 0.019746, Val Loss 0.04826, Val Accuracy 0.917232
+1
+Student_network, Epoch 21, Train Loss 0.019663, Val Loss 0.048223, Val Accuracy 0.91883
+0
+Student_network, Epoch 22, Train Loss 0.019619, Val Loss 0.04824, Val Accuracy 0.918331
+0
+Student_network, Epoch 23, Train Loss 0.019594, Val Loss 0.04822, Val Accuracy 0.91903
+1
+Student_network, Epoch 24, Train Loss 0.019582, Val Loss 0.048234, Val Accuracy 0.918031
+0
+Student_network, Epoch 25, Train Loss 0.019557, Val Loss 0.048222, Val Accuracy 0.91893
+1
+Student_network, Epoch 26, Train Loss 0.019568, Val Loss 0.048247, Val Accuracy 0.919529
+Epoch    26: reducing learning rate of group 0 to 1.0000e-03.
+2
+Student_network, Epoch 27, Train Loss 0.019536, Val Loss 0.048219, Val Accuracy 0.919129
+3
+Student_network, Epoch 28, Train Loss 0.019468, Val Loss 0.048217, Val Accuracy 0.919229
+0
+Student_network, Epoch 29, Train Loss 0.019453, Val Loss 0.048209, Val Accuracy 0.919529
+0
+Student_network, Epoch 30, Train Loss 0.019436, Val Loss 0.048212, Val Accuracy 0.919329
+0
+Student_network, Epoch 31, Train Loss 0.019445, Val Loss 0.048215, Val Accuracy 0.919429
+1
+Student_network, Epoch 32, Train Loss 0.019456, Val Loss 0.048215, Val Accuracy 0.919728
+2
+Student_network, Epoch 33, Train Loss 0.019465, Val Loss 0.04821, Val Accuracy 0.919329
+3
+Student_network, Epoch 34, Train Loss 0.019444, Val Loss 0.048211, Val Accuracy 0.919329
+Epoch    34: reducing learning rate of group 0 to 1.0000e-04.
+4
+Student_network, Epoch 35, Train Loss 0.01943, Val Loss 0.048209, Val Accuracy 0.919429
+5
+Student_network, Epoch 36, Train Loss 0.01943, Val Loss 0.048212, Val Accuracy 0.919329
+0
+Student_network, Epoch 37, Train Loss 0.019431, Val Loss 0.048211, Val Accuracy 0.919329
+1
+Student_network, Epoch 38, Train Loss 0.019429, Val Loss 0.048213, Val Accuracy 0.919429
+2
+Student_network, Epoch 39, Train Loss 0.019432, Val Loss 0.048211, Val Accuracy 0.919529
+Epoch    39: reducing learning rate of group 0 to 1.0000e-05.
+3
+Student_network, Epoch 40, Train Loss 0.019431, Val Loss 0.04821, Val Accuracy 0.919529
+4
+Student_network, Epoch 41, Train Loss 0.01943, Val Loss 0.048207, Val Accuracy 0.919529
+5
+Student_network, Epoch 42, Train Loss 0.01943, Val Loss 0.048212, Val Accuracy 0.919529
+0
+Student_network, Epoch 43, Train Loss 0.01943, Val Loss 0.048207, Val Accuracy 0.919529
+1
+Student_network, Epoch 44, Train Loss 0.01943, Val Loss 0.048217, Val Accuracy 0.919529
+Epoch    44: reducing learning rate of group 0 to 1.0000e-06.
+0
+Student_network, Epoch 45, Train Loss 0.01943, Val Loss 0.048213, Val Accuracy 0.919529
+1
+Student_network, Epoch 46, Train Loss 0.01943, Val Loss 0.048207, Val Accuracy 0.919529
+2
+Student_network, Epoch 47, Train Loss 0.01943, Val Loss 0.048207, Val Accuracy 0.919529
+3
+Student_network, Epoch 48, Train Loss 0.01943, Val Loss 0.04821, Val Accuracy 0.919529
+4
+Student_network, Epoch 49, Train Loss 0.01943, Val Loss 0.048211, Val Accuracy 0.919529
+Epoch    49: reducing learning rate of group 0 to 1.0000e-07.
+5
+Student_network, Epoch 1, Train Loss 0.01808, Val Loss 0.050454, Val Accuracy 0.881989
+0
+Student_network, Epoch 2, Train Loss 0.013155, Val Loss 0.049661, Val Accuracy 0.896565
+0
+Student_network, Epoch 3, Train Loss 0.012725, Val Loss 0.04932, Val Accuracy 0.901957
+0
+Student_network, Epoch 4, Train Loss 0.012516, Val Loss 0.049121, Val Accuracy 0.905351
+0
+Student_network, Epoch 5, Train Loss 0.012424, Val Loss 0.048963, Val Accuracy 0.909445
+0
+Student_network, Epoch 6, Train Loss 0.012308, Val Loss 0.048874, Val Accuracy 0.910843
+0
+Student_network, Epoch 7, Train Loss 0.012244, Val Loss 0.048785, Val Accuracy 0.913039
+0
+Student_network, Epoch 8, Train Loss 0.012152, Val Loss 0.048715, Val Accuracy 0.914038
+0
+Student_network, Epoch 9, Train Loss 0.012097, Val Loss 0.048667, Val Accuracy 0.914836
+0
+Student_network, Epoch 10, Train Loss 0.012043, Val Loss 0.048622, Val Accuracy 0.917133
+0
+Student_network, Epoch 11, Train Loss 0.012013, Val Loss 0.04858, Val Accuracy 0.917133
+0
+Student_network, Epoch 12, Train Loss 0.011962, Val Loss 0.04855, Val Accuracy 0.917432
+0
+Student_network, Epoch 13, Train Loss 0.011911, Val Loss 0.048525, Val Accuracy 0.91873
+0
+Student_network, Epoch 14, Train Loss 0.011908, Val Loss 0.048501, Val Accuracy 0.91873
+0
+Student_network, Epoch 15, Train Loss 0.01186, Val Loss 0.04847, Val Accuracy 0.919728
+0
+Student_network, Epoch 16, Train Loss 0.011847, Val Loss 0.048454, Val Accuracy 0.920727
+0
+Student_network, Epoch 17, Train Loss 0.011817, Val Loss 0.048421, Val Accuracy 0.920827
+0
+Student_network, Epoch 18, Train Loss 0.011795, Val Loss 0.048407, Val Accuracy 0.920827
+0
+Student_network, Epoch 19, Train Loss 0.011794, Val Loss 0.048398, Val Accuracy 0.921026
+0
+Student_network, Epoch 20, Train Loss 0.011777, Val Loss 0.04838, Val Accuracy 0.921925
+0
+Student_network, Epoch 21, Train Loss 0.011764, Val Loss 0.048368, Val Accuracy 0.922624
+0
+Student_network, Epoch 22, Train Loss 0.011751, Val Loss 0.048356, Val Accuracy 0.922324
+0
+Student_network, Epoch 23, Train Loss 0.011709, Val Loss 0.048336, Val Accuracy 0.922823
+0
+Student_network, Epoch 24, Train Loss 0.011706, Val Loss 0.048326, Val Accuracy 0.922923
+0
+Student_network, Epoch 25, Train Loss 0.011685, Val Loss 0.048327, Val Accuracy 0.922224
+0
+Student_network, Epoch 26, Train Loss 0.011678, Val Loss 0.048305, Val Accuracy 0.923522
+1
+Student_network, Epoch 27, Train Loss 0.011665, Val Loss 0.048303, Val Accuracy 0.923323
+0
+Student_network, Epoch 28, Train Loss 0.011648, Val Loss 0.048302, Val Accuracy 0.923622
+0
+Student_network, Epoch 29, Train Loss 0.011649, Val Loss 0.048306, Val Accuracy 0.922724
+0
+Student_network, Epoch 30, Train Loss 0.011651, Val Loss 0.04828, Val Accuracy 0.924221
+1
+Student_network, Epoch 31, Train Loss 0.011642, Val Loss 0.048276, Val Accuracy 0.924022
+0
+Student_network, Epoch 32, Train Loss 0.011627, Val Loss 0.04826, Val Accuracy 0.924221
+0
+Student_network, Epoch 33, Train Loss 0.011628, Val Loss 0.04826, Val Accuracy 0.924121
+0
+Student_network, Epoch 34, Train Loss 0.011617, Val Loss 0.048253, Val Accuracy 0.924521
+0
+Student_network, Epoch 35, Train Loss 0.011586, Val Loss 0.048243, Val Accuracy 0.92512
+0
+Student_network, Epoch 36, Train Loss 0.01159, Val Loss 0.048234, Val Accuracy 0.92522
+0
+Student_network, Epoch 37, Train Loss 0.011566, Val Loss 0.048244, Val Accuracy 0.924621
+0
+Student_network, Epoch 38, Train Loss 0.01156, Val Loss 0.048222, Val Accuracy 0.925419
+1
+Student_network, Epoch 39, Train Loss 0.011558, Val Loss 0.048214, Val Accuracy 0.92512
+0
+Student_network, Epoch 40, Train Loss 0.011558, Val Loss 0.048219, Val Accuracy 0.92512
+0
+Student_network, Epoch 41, Train Loss 0.011545, Val Loss 0.048217, Val Accuracy 0.926018
+1
+Student_network, Epoch 42, Train Loss 0.011516, Val Loss 0.048214, Val Accuracy 0.925619
+2
+Student_network, Epoch 43, Train Loss 0.011517, Val Loss 0.048212, Val Accuracy 0.925619
+3
+Student_network, Epoch 44, Train Loss 0.011517, Val Loss 0.048203, Val Accuracy 0.925919
+0
+Student_network, Epoch 45, Train Loss 0.011513, Val Loss 0.048202, Val Accuracy 0.926218
+0
+Student_network, Epoch 46, Train Loss 0.011496, Val Loss 0.048197, Val Accuracy 0.926418
+0
+Student_network, Epoch 47, Train Loss 0.011504, Val Loss 0.048186, Val Accuracy 0.927316
+0
+Student_network, Epoch 48, Train Loss 0.011495, Val Loss 0.048177, Val Accuracy 0.926717
+0
+Student_network, Epoch 49, Train Loss 0.011485, Val Loss 0.048186, Val Accuracy 0.926118
+0
+Student_network, Epoch 50, Train Loss 0.011489, Val Loss 0.048176, Val Accuracy 0.926717
+1
+Student_network, Epoch 1, Train Loss 0.02402, Val Loss 0.053845, Val Accuracy 0.882788
+0
+Student_network, Epoch 2, Train Loss 0.014193, Val Loss 0.052258, Val Accuracy 0.895168
+0
+Student_network, Epoch 3, Train Loss 0.012557, Val Loss 0.051562, Val Accuracy 0.901857
+0
+Student_network, Epoch 4, Train Loss 0.011738, Val Loss 0.05116, Val Accuracy 0.90625
+0
+Student_network, Epoch 5, Train Loss 0.011221, Val Loss 0.0509, Val Accuracy 0.907947
+0
+Student_network, Epoch 6, Train Loss 0.010855, Val Loss 0.050696, Val Accuracy 0.909844
+0
+Student_network, Epoch 7, Train Loss 0.010575, Val Loss 0.050552, Val Accuracy 0.911841
+0
+Student_network, Epoch 8, Train Loss 0.010354, Val Loss 0.050435, Val Accuracy 0.91264
+0
+Student_network, Epoch 9, Train Loss 0.010171, Val Loss 0.050328, Val Accuracy 0.913838
+0
+Student_network, Epoch 10, Train Loss 0.010021, Val Loss 0.050241, Val Accuracy 0.913838
+0
+Student_network, Epoch 11, Train Loss 0.009888, Val Loss 0.050168, Val Accuracy 0.914836
+0
+Student_network, Epoch 12, Train Loss 0.009774, Val Loss 0.050106, Val Accuracy 0.915735
+0
+Student_network, Epoch 13, Train Loss 0.009675, Val Loss 0.050056, Val Accuracy 0.916334
+0
+Student_network, Epoch 14, Train Loss 0.009587, Val Loss 0.050016, Val Accuracy 0.916933
+0
+Student_network, Epoch 15, Train Loss 0.009508, Val Loss 0.049966, Val Accuracy 0.916733
+0
+Student_network, Epoch 16, Train Loss 0.009436, Val Loss 0.049934, Val Accuracy 0.916534
+0
+Student_network, Epoch 17, Train Loss 0.009371, Val Loss 0.049895, Val Accuracy 0.917133
+0
+Student_network, Epoch 18, Train Loss 0.009309, Val Loss 0.049863, Val Accuracy 0.917232
+0
+Student_network, Epoch 19, Train Loss 0.009256, Val Loss 0.049829, Val Accuracy 0.917732
+0
+Student_network, Epoch 20, Train Loss 0.009204, Val Loss 0.049806, Val Accuracy 0.918431
+0
+Student_network, Epoch 21, Train Loss 0.009157, Val Loss 0.049783, Val Accuracy 0.919429
+0
+Student_network, Epoch 22, Train Loss 0.009114, Val Loss 0.049761, Val Accuracy 0.919429
+0
+Student_network, Epoch 23, Train Loss 0.009069, Val Loss 0.049751, Val Accuracy 0.91903
+0
+Student_network, Epoch 24, Train Loss 0.009031, Val Loss 0.049722, Val Accuracy 0.91863
+0
+Student_network, Epoch 25, Train Loss 0.008995, Val Loss 0.0497, Val Accuracy 0.91853
+0
+Student_network, Epoch 26, Train Loss 0.00896, Val Loss 0.04968, Val Accuracy 0.919329
+0
+Student_network, Epoch 27, Train Loss 0.008927, Val Loss 0.049665, Val Accuracy 0.919828
+0
+Student_network, Epoch 28, Train Loss 0.008895, Val Loss 0.049648, Val Accuracy 0.91883
+0
+Student_network, Epoch 29, Train Loss 0.008867, Val Loss 0.049637, Val Accuracy 0.920727
+0
+Student_network, Epoch 30, Train Loss 0.008839, Val Loss 0.049624, Val Accuracy 0.919629
+0
+Student_network, Epoch 31, Train Loss 0.00881, Val Loss 0.049596, Val Accuracy 0.920128
+0
+Student_network, Epoch 32, Train Loss 0.008786, Val Loss 0.049602, Val Accuracy 0.920627
+0
+Student_network, Epoch 33, Train Loss 0.008758, Val Loss 0.049584, Val Accuracy 0.921226
+1
+Student_network, Epoch 34, Train Loss 0.00874, Val Loss 0.049564, Val Accuracy 0.920028
+0
+Student_network, Epoch 35, Train Loss 0.008714, Val Loss 0.049549, Val Accuracy 0.920627
+0
+Student_network, Epoch 36, Train Loss 0.008695, Val Loss 0.049553, Val Accuracy 0.921426
+0
+Student_network, Epoch 37, Train Loss 0.008672, Val Loss 0.049554, Val Accuracy 0.920427
+1
+Student_network, Epoch 38, Train Loss 0.008653, Val Loss 0.049531, Val Accuracy 0.921426
+2
+Student_network, Epoch 39, Train Loss 0.008636, Val Loss 0.049517, Val Accuracy 0.921725
+0
+Student_network, Epoch 40, Train Loss 0.008614, Val Loss 0.049521, Val Accuracy 0.921126
+0
+Student_network, Epoch 41, Train Loss 0.0086, Val Loss 0.049512, Val Accuracy 0.921326
+1
+Student_network, Epoch 42, Train Loss 0.008582, Val Loss 0.049495, Val Accuracy 0.919529
+0
+Student_network, Epoch 43, Train Loss 0.008563, Val Loss 0.04948, Val Accuracy 0.922424
+0
+Student_network, Epoch 44, Train Loss 0.008549, Val Loss 0.04949, Val Accuracy 0.920427
+0
+Student_network, Epoch 45, Train Loss 0.008532, Val Loss 0.049464, Val Accuracy 0.920927
+1
+Student_network, Epoch 46, Train Loss 0.008516, Val Loss 0.049457, Val Accuracy 0.921925
+0
+Student_network, Epoch 47, Train Loss 0.008502, Val Loss 0.049451, Val Accuracy 0.921725
+0
+Student_network, Epoch 48, Train Loss 0.008485, Val Loss 0.049452, Val Accuracy 0.920028
+0
+Student_network, Epoch 49, Train Loss 0.008475, Val Loss 0.049444, Val Accuracy 0.922524
+1
+Student_network, Epoch 50, Train Loss 0.008463, Val Loss 0.049445, Val Accuracy 0.921625
+0
+{'lr: 0.01, epochs: 50, T: 2.0, weight: 0.9classwise_performance': {0.62892,
+                                                                    0.88178,
+                                                                    0.89105,
+                                                                    0.91873,
+                                                                    0.92464,
+                                                                    0.92871,
+                                                                    0.9572,
+                                                                    0.96201,
+                                                                    0.96211,
+                                                                    0.97959},
+ 'lr: 0.01, epochs: 50, T: 2.0, weight: 0.9val loss': 0.04818,
+ 'lr: 0.01, epochs: 50, T: 20.0, weight: 0.0classwise_performance': {0.54484,
+                                                                     0.84981,
+                                                                     0.87451,
+                                                                     0.90631,
+                                                                     0.91378,
+                                                                     0.91584,
+                                                                     0.93833,
+                                                                     0.94781,
+                                                                     0.96099,
+                                                                     0.98673},
+ 'lr: 0.01, epochs: 50, T: 20.0, weight: 0.0val loss': 0.04945,
+ 'lr: 0.01, epochs: 50, T: 20.0, weight: 0.9classwise_performance': {0.67489,
+                                                                     0.83152,
+                                                                     0.83366,
+                                                                     0.8809,
+                                                                     0.89826,
+                                                                     0.91446,
+                                                                     0.93946,
+                                                                     0.94455,
+                                                                     0.9449,
+                                                                     0.96652},
+ 'lr: 0.01, epochs: 50, T: 20.0, weight: 0.9val loss': 0.04922,
+ 'lr: 0.01, epochs: 50, T: 30.0, weight: 0.9classwise_performance': {0.69843,
+                                                                     0.78196,
+                                                                     0.8306,
+                                                                     0.84533,
+                                                                     0.88953,
+                                                                     0.92261,
+                                                                     0.93841,
+                                                                     0.93861,
+                                                                     0.94082,
+                                                                     0.97004},
+ 'lr: 0.01, epochs: 50, T: 30.0, weight: 0.9val loss': 0.04957,
+ 'lr: 0.01, epochs: 50, T: 5.0, weight: 0.9classwise_performance': {0.69507,
+                                                                    0.88327,
+                                                                    0.89147,
+                                                                    0.91179,
+                                                                    0.91752,
+                                                                    0.93267,
+                                                                    0.94764,
+                                                                    0.95616,
+                                                                    0.96652,
+                                                                    0.97551},
+ 'lr: 0.01, epochs: 50, T: 5.0, weight: 0.9val loss': 0.04821}

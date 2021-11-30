@@ -7,14 +7,14 @@ So far:
 - Teacher and student models setup, along with their respective training loops
 - Visualization is bare bones
 - Custom dataloaders that leave out certain classes (to test implicit learning from soft labels)
-
+- Train teacher network. 14-16 errors on the val set.  
+- grid searcher is made
 
 
 To do:
-- Train teacher network. Should be good enough to generate meaningful soft labels. 
-- Test implicit learning from soft labels
-- Setup a hyper param search over softmax temperature values, establish baseline for teacher model. 
+- Abalation tests for performance with and without soft labels at different temperature values.
+- Test implicit learning from soft labels 
 - Mathematically prove that minimizing the logsoftmax -> CE (torch) for soft labels is equivalent to bringing the softmax as close to the true soft-label distribution as possible (for my own understanding)
+- Derive dC/dz for CE on softmax with temperature
 
 
-Remember to clean up all the if __name__ == "__main__" when done. 
