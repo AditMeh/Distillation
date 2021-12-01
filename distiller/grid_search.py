@@ -60,7 +60,6 @@ class HyperParamSearch:
             performance_report = get_classwise_performance_report(
                 model, classwise_dict_val, device)
 
-            print(performance_report)
             results[experiment_name + " classwise_performance"] = {
                 x: round(performance_report[x], 5) for x in performance_report.keys()}
 

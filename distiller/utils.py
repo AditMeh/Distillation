@@ -48,8 +48,6 @@ class EarlyStopping:
         self.best_model = None
 
     def __call__(self, val_loss, net):
-        print(self.epoch_counts)
-
         if self.best_val_loss > val_loss + self.delta:
             self.best_val_loss = val_loss
             self.epoch_counts = 0
