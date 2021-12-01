@@ -3,14 +3,42 @@
         "lr": 0.01,
         "classes": 5,
         "weight": 0.9,
-        "epochs": 50,
+        "epochs": 70,
         "T": 30.0
+    },
+    "5 classes lower learning rate": {
+        "lr": 0.001,
+        "classes": 5,
+        "weight": 0.9,
+        "epochs": 70,
+        "T": 30.0
+    },
+    "5 classes lower learning rate 20 temp": {
+        "lr": 0.001,
+        "classes": 5,
+        "weight": 0.9,
+        "epochs": 70,
+        "T": 20.0
+    },
+    "5 classes lower learning rate 15 temp": {
+        "lr": 0.001,
+        "classes": 5,
+        "weight": 0.9,
+        "epochs": 70,
+        "T": 15.0
     },
     "5 classes no weight": {
         "lr": 0.01,
         "classes": 5,
         "weight": 0.0,
-        "epochs": 50,
+        "epochs": 70,
         "T": 30.0
-    }
+    },
+    "5 classes no weight lr 0.001": {
+        "lr": 0.001,
+        "classes": 5,
+        "weight": 0.0,
+        "epochs": 70,
+        "T": 30.0
+    },
 }
