@@ -80,5 +80,5 @@ if __name__ == "__main__":
 
     results = searcher.run_grid_search()
 
-with open("json_results/" +  args.config_path + ".json", "w") as outfile:
-    json.dump(results, outfile)
+    with open("json_results/" +  args.config_path + ".json", "w") as outfile:
+        json.dump(results, outfile)
