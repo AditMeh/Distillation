@@ -6,6 +6,7 @@ from utils import create_parser_grid_search, get_classwise_performance_report
 from train_student import distill_model
 from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 import torch
+import os
 
 
 class HyperParamSearch:
@@ -80,5 +81,9 @@ if __name__ == "__main__":
 
     results = searcher.run_grid_search()
 
-    with open("json_results/" +  args.config_path + ".json", "w") as outfile:
+
+if not os.path.exists('json_results'):
+    os.makedirs('json_results')
+
+    with open("json_results/" + args.config_path, "w") as outfile:
         json.dump(results, outfile)
