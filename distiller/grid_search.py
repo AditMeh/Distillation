@@ -54,8 +54,8 @@ class HyperParamSearch:
                 hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"],
                 teacher_network, device, train_dataset, val_dataset)
 
-            experiment_name = "lr: {}, epochs: {}, T: {}, weight: {}".format(
-                hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"])
+            experiment_name = "lr: {}, epochs: {}, T: {}, weight: {}, classes: {}".format(
+                hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"], hparams["classes"])
 
             results[experiment_name + " val loss"] = round(val_loss_final, 5)
 
