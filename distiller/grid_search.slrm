@@ -17,7 +17,7 @@ source ../../activate_conda.sh
 
 conda activate torch_3.9
 
-python3 grid_search.py temperature_grid_search.json weights/Teacher_network_val_loss0.0001
+python3 grid_search.py temperature_grid_search_2_4.json weights/Teacher_network_val_loss0.0001
 
 
 
