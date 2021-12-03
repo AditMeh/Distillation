@@ -1,49 +1,49 @@
 {
     "5 classes 20 temp": {
-        "lr": 0.001,
-        "classes": 5,
+        "lr": 0.01,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 20.0
     },
     "5 classes 15 temp": {
-        "lr": 0.001,
-        "classes": 5,
+        "lr": 0.01,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 15.0
     },
     "5 classes 10 temp": {
-        "lr": 0.001,
-        "classes": 5,
+        "lr": 0.01,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 10.0
     },
     "5 classes 5 temp": {
-        "lr": 0.001,
-        "classes": 5,
+        "lr": 0.01,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 5.0
     },
     "7 classes 5 temp": {
-        "lr": 0.001,
-        "classes": 5,
+        "lr": 0.01,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 5.0
     }, 
     "7 classes 2.5 temp": {
         "lr": 0.001,
-        "classes": 5,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 2.5
     },
     "7 classes 2.5 temp higher l4": {
         "lr": 0.01,
-        "classes": 5,
+        "classes": [0,1,2,3,4,5],
         "weight": 0.9,
         "epochs": 70,
         "T": 2.5

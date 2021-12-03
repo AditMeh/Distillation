@@ -7,7 +7,7 @@ from train_student import distill_model
 from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 import torch
 import os
-import uuid 
+import uuid
 
 
 class HyperParamSearch:
@@ -48,7 +48,7 @@ class HyperParamSearch:
         for key in self.hparams.keys():
             hparams = self.hparams[key]
             train_dataset, val_dataset = create_dataloaders_mnist(
-                classwise_dict_train, classwise_dict_val, [i for i in range(hparams["classes"] + 1)])
+                classwise_dict_train, classwise_dict_val, hparams["classes"])
 
             val_loss_final, model = self.run_single_search(
                 hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"],
@@ -82,9 +82,8 @@ if __name__ == "__main__":
 
     results = searcher.run_grid_search()
 
-
     if not os.path.exists('json_results'):
         os.makedirs('json_results')
 
-    with open("json_results/" + args.config_path + uuid.uuid3, "w") as outfile:
+    with open("json_results/" + args.config_path + uuid.uuid4().hex, "w") as outfile:
         json.dump(results, outfile)
