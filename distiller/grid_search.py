@@ -7,6 +7,7 @@ from train_student import distill_model
 from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 import torch
 import os
+import uuid 
 
 
 class HyperParamSearch:
@@ -82,8 +83,8 @@ if __name__ == "__main__":
     results = searcher.run_grid_search()
 
 
-if not os.path.exists('json_results'):
-    os.makedirs('json_results')
+    if not os.path.exists('json_results'):
+        os.makedirs('json_results')
 
-    with open("json_results/" + args.config_path, "w") as outfile:
+    with open("json_results/" + args.config_path + uuid.uuid3, "w") as outfile:
         json.dump(results, outfile)
