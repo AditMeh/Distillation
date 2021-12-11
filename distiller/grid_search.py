@@ -21,9 +21,10 @@ class HyperParamSearch:
 
         # Loading the teacher network
 
-        train_history, val_history = distill_model(
+        train_history, val_history, best_model_state = distill_model(
             False, "weights/", student_network, teacher_network, lr, T, weight, epochs, train_dataset, val_dataset, device)
 
+        student_network.load_state_dict(best_model_state)
         return val_history[-1], student_network
 
     def run_grid_search(self):

@@ -20,7 +20,7 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
     optimizer = SGD(params=student_net.parameters(), lr=lr)
 
     statsTracker = StatsTracker()
-    earlyStopping = EarlyStopping(patience=6, delta=0.0)
+    earlyStopping = EarlyStopping(patience=15, delta=0.0)
 
     scheduler = ReduceLROnPlateau(optimizer, 'min', patience=4, verbose=True)
     for epoch in range(1, epochs + 1):
@@ -86,7 +86,7 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
             os.makedirs(save_dir)
         torch.save(earlyStopping.best_model, os.path.join(
             save_dir, 'Student_network_val_loss{}'.format(round(val_loss_epoch, 5))))
-    return statsTracker.train_hist, statsTracker.val_hist
+    return statsTracker.train_hist, statsTracker.val_hist, earlyStopping.best_model
 
 
 if __name__ == "__main__":

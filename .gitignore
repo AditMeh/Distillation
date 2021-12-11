@@ -1,3 +1,2 @@
-distiller/__pycache__/
-
-**/__pycache__
+distiller/slurm*
+__pycache__/
