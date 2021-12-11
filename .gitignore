@@ -1,2 +1,3 @@
 distiller/slurm*
 __pycache__/
+distiller/grid_search.slrm
