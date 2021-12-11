@@ -10,6 +10,10 @@ This table is for a model trained on classes 0-5, tested on classes 0-9. THe stu
 
 More tables to come. But as you can see above, the student model is able to learn how to classify images of a class that it did not see during training. Through these experiments, I have found that temperature values between 8-12 work the best for this task, along with a learning rate of 0.01 as 0.001 is too small.
 
+I also tested this using the smallest possible student model with the following architecture:
+``` 28*28 -> layer 1 -> (*, 10) output```
+However, this resulted in poor accuracies in the 50% range for each of the unseen classes, which still is better than the baseline which gets accuracies of 0.0% for all unseen classes during training.
+
 
 So far:
 
