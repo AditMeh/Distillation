@@ -15,8 +15,8 @@ So far:
 
 - Distillation loss using torch 1.10 soft-label cross-entropy loss (Kullback-Leibler is the next best option)
 - Teacher and student models setup, along with their respective training loops
-- Visualization.
-- Custom dataloaders that leave out certain classes (to test implicit learning from soft labels)
+- Basic visualization of training curves.
+- Custom MNIST dataloaders that leave out certain classes (to test implicit learning from soft labels)
 - Train teacher network. 14-16 errors on the val set.  
 - Grid searcher.
 
@@ -25,7 +25,7 @@ To do:
 - Abalation tests for performance with and without soft labels at different temperature values. Testing for changes in accuracy. 
 - Test implicit learning from soft labels (IPR)
 - Derive dC/dz for CE on softmax with temperature
-
+- Try on CIFAR10
 
 ### References: 
 - https://arxiv.org/abs/1503.02531
