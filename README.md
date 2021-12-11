@@ -23,7 +23,7 @@ So far:
 
 To do:
 - Abalation tests for performance with and without soft labels at different temperature values. Testing for changes in accuracy. 
-- Test implicit learning from soft labels 
+- Test implicit learning from soft labels (IPR)
 - Derive dC/dz for CE on softmax with temperature
 
 
