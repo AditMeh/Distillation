@@ -1,5 +1,4 @@
 ### Interesting results
-------
 This performance table is for a model trained on classes 0-5, tested on classes 0-9. The student network (all dense layers), has the following architecture:
 
 ``` 28*28 input -> layer 1 -> 14*14 output -> Relu -> Layer 2 -> (*, 10) output```
