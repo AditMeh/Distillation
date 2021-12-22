@@ -21,7 +21,9 @@ The below table shows the results for training the student network on all classe
 ----
 
 I also tested the above experiments using the smallest possible student model with the following architecture:
+
 ``` 28*28 -> layer 1 -> (*, 10) output```
+
 However, this resulted in poor accuracies in the 50% range for each of the unseen classes, which still is better than the baseline which gets accuracies of 0.0% for all unseen classes during training. But this also shows that this small student model is not capable of learning from the implicit labels, so I chose a larger architecture that would be able to fit to my data (and maybe even overfit!)
 
 
