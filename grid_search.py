@@ -22,16 +22,16 @@ class HyperParamSearch:
 
         # Loading the teacher network
 
-        train_history, val_history, best_model_state = distill_model(
+        train_history, val_history, best_val_loss, best_model_state = distill_model(
             False, "weights/", student_network, teacher_network, lr, T, weight, epochs, train_dataset, val_dataset, device)
 
         student_network.load_state_dict(best_model_state)
-        return val_history[-1], student_network
+        return val_history[-1], best_val_loss, student_network
 
     def run_grid_search(self):
         results = {}
         vis_results = {"columns": [
-            "lr", "T", "epochs", "weight"] + [str(i) for i in range(10)], "data": []}
+            "lr", "T", "epochs", "weight", "best_loss"] + [str(i) for i in range(10)], "data": []}
 
         device = (torch.device('cuda') if torch.cuda.is_available()
                   else torch.device('cpu'))
@@ -54,7 +54,7 @@ class HyperParamSearch:
             train_dataset, val_dataset = create_dataloaders_mnist(
                 classwise_dict_train, classwise_dict_val, hparams["classes"])
 
-            val_loss_final, model = self.run_single_search(
+            val_loss_final, best_val_loss, model = self.run_single_search(
                 hparams["lr"], hparams["epochs"], hparams["T"], hparams["weight"],
                 teacher_network, device, train_dataset, val_dataset)
 
@@ -70,19 +70,21 @@ class HyperParamSearch:
                 x: round(performance_report[x], 5) for x in performance_report
             }
 
-            get_vis_results(performance_report, vis_results, hparams)
+            get_vis_results(performance_report, vis_results,
+                            best_val_loss, hparams)
 
             results[experiment_name + " classwise_performance"] = {
                 x: performance_report[x] for x in performance_report.keys()}
         return results, vis_results
 
 
-def get_vis_results(performance_report, vis_results, hparams):
+def get_vis_results(performance_report, vis_results, best_val_loss, hparams):
     vis_report = deepcopy(performance_report)
     vis_report["lr"] = str(hparams["lr"])
     vis_report["T"] = str(hparams["T"])
     vis_report["epochs"] = str(hparams["epochs"])
     vis_report["weight"] = str(hparams["weight"])
+    vis_report["best_loss"] = str(round(best_val_loss, 5))
 
     vis_results["data"].append(vis_report)
 

@@ -94,7 +94,7 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
         torch.save(statsTracker.best_model, os.path.join(
             save_dir, 'Student_network_val_loss{}'.format(round(val_loss_epoch, 5))))
 
-    return statsTracker.train_hist, statsTracker.val_hist, statsTracker.best_model
+    return statsTracker.train_hist, statsTracker.val_hist, statsTracker.best_val_loss_value, statsTracker.best_model
 
 
 if __name__ == "__main__":
@@ -126,7 +126,7 @@ if __name__ == "__main__":
     print('Student Model: {} params, Teacher Model: {} params'.format(
         count_parameters(student_network), count_parameters(teacher_network)))
 
-    train_history, val_history, best_weights = distill_model(args.save, args.save_dir, student_network, teacher_network,
+    train_history, val_history, best_val_loss, best_weights = distill_model(args.save, args.save_dir, student_network, teacher_network,
                                                              args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
 
     report = get_classwise_performance_report(
