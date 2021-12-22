@@ -1,8 +1,9 @@
 from torch.nn.modules.loss import CrossEntropyLoss
 from models.teacher_mnist import TeacherNetMnist
 from dataloader import create_dataloaders_mnist
-from utils import StatsTracker, count_parameters, create_parser_train_teacher, EarlyStopping
-
+from utils import count_parameters, create_parser_train_teacher
+from TorchUtils.training.EarlyStopping import EarlyStopping
+from TorchUtils.training.StatsTracker import StatsTracker
 import torch
 from torch.nn.functional import softmax
 from torch.optim import Adam
@@ -60,14 +61,14 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
 
         statsTracker.update_histories(train_loss_epoch, None)
 
-        statsTracker.update_histories(None, val_loss_epoch)
+        statsTracker.update_histories(None, val_loss_epoch, net)
         print("correct: " + str(correct) + " out of: " + str(total))
         print('Teacher_network: Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
             epoch, round(train_loss_epoch, 5), round(val_loss_epoch, 5), round(val_accuracy, 5)))
 
         scheduler.step(val_loss_epoch)
 
-        earlyStopping(val_loss_epoch, net)
+        earlyStopping(val_loss_epoch)
 
         if earlyStopping.stop:
             break
@@ -75,7 +76,7 @@ def train_model(save, save_dir, net, lr, epochs, train_loader, val_loader, devic
     if save:
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
-        torch.save(earlyStopping.best_model, os.path.join(
+        torch.save(statsTracker.best_model, os.path.join(
             save_dir, 'Teacher_network_val_loss{}'.format(round(val_loss_epoch, 5))))
 
     return statsTracker.train_hist, statsTracker.val_hist

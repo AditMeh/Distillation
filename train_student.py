@@ -1,9 +1,12 @@
 from matplotlib.pyplot import plot
+from torch.jit import Error
 from models.teacher_mnist import TeacherNetMnist
 from models.student_mnist import StudentNetMnist
 from dataloader import create_dataloaders_mnist, generate_mnist_classwise_dict
 from distiller import distillation_loss
-from utils import StatsTracker, create_parser_train_student, count_parameters, EarlyStopping, get_classwise_performance_report
+from utils import create_parser_train_student, count_parameters, get_classwise_performance_report
+from TorchUtils.training.EarlyStopping import EarlyStopping
+from TorchUtils.training.StatsTracker import StatsTracker
 from visualization.plot_train_graph import plot_train_graph
 
 import torch
@@ -71,22 +74,27 @@ def distill_model(save, save_dir, student_net, teacher_net, lr, T, weight, epoch
 
         statsTracker.update_histories(train_loss_epoch, None)
 
-        statsTracker.update_histories(None, val_loss_epoch)
+        statsTracker.update_histories(None, val_loss_epoch, student_net)
 
         print('Student_network, Epoch {}, Train Loss {}, Val Loss {}, Val Accuracy {}'.format(
             epoch, round(train_loss_epoch, 6), round(val_loss_epoch, 6), round(val_accuracy, 6)))
 
         scheduler.step(val_loss_epoch)
-        earlyStopping(val_loss_epoch, student_net)
+        earlyStopping(val_loss_epoch)
 
         if earlyStopping.stop:
+            print("Quitting due to early stopping \n")
             break
+
     if save:
+        if statsTracker.best_model == None:
+            raise TypeError
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
-        torch.save(earlyStopping.best_model, os.path.join(
+        torch.save(statsTracker.best_model, os.path.join(
             save_dir, 'Student_network_val_loss{}'.format(round(val_loss_epoch, 5))))
-    return statsTracker.train_hist, statsTracker.val_hist, earlyStopping.best_model
+
+    return statsTracker.train_hist, statsTracker.val_hist, statsTracker.best_model
 
 
 if __name__ == "__main__":
@@ -118,11 +126,11 @@ if __name__ == "__main__":
     print('Student Model: {} params, Teacher Model: {} params'.format(
         count_parameters(student_network), count_parameters(teacher_network)))
 
-    train_history, val_history = distill_model(args.save, args.save_dir, student_network, teacher_network,
-                                               args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
+    train_history, val_history, best_weights = distill_model(args.save, args.save_dir, student_network, teacher_network,
+                                                             args.lr, args.T, args.weight, args.epochs, train_dataset, val_dataset, device)
 
     report = get_classwise_performance_report(
-        student_network, classwise_dict_val, device=device)
+        student_network.load_state_dict(best_weights), classwise_dict_val, device=device)
     import pprint
     pprint.pprint(report)
     plot_train_graph(train_history, val_history,

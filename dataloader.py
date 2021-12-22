@@ -1,10 +1,6 @@
-from torchvision import datasets
-from torchvision.datasets import MNIST
 import torch
-from torch._C import dtype
 from torchvision import transforms
 from torchvision.transforms.transforms import ToTensor
-from utils import OneHotEncoder
 
 from PIL import Image
 
@@ -59,27 +55,6 @@ def generate_mnist_classwise_dict(processed_mnist):
         classwise_dict[label.item()].append(images[i])
 
     return classwise_dict
-
-
-def create_onehot_dataloaders_mnist(classes_train=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-                                    classes_val=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]):
-
-    training_dataset = torch.utils.data.DataLoader(
-        MNISTDataset(data_directory='data/MNIST/processed/training.pt',
-                     classes=classes_train,
-                     target_transform=transforms.Compose([OneHotEncoder(10)]),
-                     classwise_dict=classwise_dict),
-        batch_size=32, shuffle=True)
-
-    test_set = torch.utils.data.DataLoader(
-        MNISTDataset(data_directory='data/MNIST/processed/test.pt',
-                     classes=classes_val,
-                     transform=ToTensor(),
-                     target_transform=transforms.Compose([OneHotEncoder(10)]),
-                     classwise_dict=classwise_dict),
-        batch_size=32, shuffle=True)
-
-    return training_dataset, test_set
 
 
 def create_dataloaders_mnist(classwise_dict_train, classwise_dict_val, classes_train):

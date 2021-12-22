@@ -86,5 +86,5 @@ if __name__ == "__main__":
     if not os.path.exists('json_results'):
         os.makedirs('json_results')
 
-    with open("json_results/" + args.config_path.split(".")[0] + uuid.uuid4().hex + ".json", "w") as outfile:
+    with open("json_results/" + os.path.split(args.config_path)[1].split(".")[0] + uuid.uuid4().hex + ".json", "w") as outfile:
         json.dump(results, outfile)
