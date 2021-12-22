@@ -1,3 +1,6 @@
 [submodule "TorchUtils"]
 	path = TorchUtils
 	url = https://github.com/AditMeh/TorchUtils
+[submodule "Markdown-Table-Generator"]
+	path = Markdown-Table-Generator
+	url = https://github.com/AditMeh/Markdown-Table-Generator
