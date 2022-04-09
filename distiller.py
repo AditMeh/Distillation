@@ -8,5 +8,5 @@ from torch.nn import CrossEntropyLoss
 
 def distillation_loss(student_logits, T, teacher_logits, ground_truth_probs, weight):
 
-    return ((weight * T**2 * CrossEntropyLoss()(student_logits/T, F.softmax(teacher_logits/T, dim=1)))
-            + (1-weight) * (CrossEntropyLoss()(student_logits, ground_truth_probs)))
+    return (((1-weight) * T**2 * CrossEntropyLoss()(student_logits/T, F.softmax(teacher_logits/T, dim=1)))
+            + (weight) * (CrossEntropyLoss()(student_logits, ground_truth_probs)))
