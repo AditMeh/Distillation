@@ -67,7 +67,7 @@ class HyperParamSearch:
                 model, classwise_dict_val, device)
 
             performance_report = {
-                x: round(performance_report[x], 5) for x in performance_report
+                x: round(performance_report[x]*100, 2) for x in performance_report
             }
 
             get_vis_results(performance_report, vis_results,
