@@ -13,10 +13,11 @@ As you can see above, the student model is able to learn how to classify images 
 ---
 The below table shows the results for training the student network on all classes in MNIST (0-9). The first row represents a weight of 0 given to the soft-label loss term, which basically means a standard training loop for the student network using CE loss. The second row represents a student net trained on a mix of both the soft labels and hard labels using a temperature of 2.5. Both networks are trained with the same LR and epochs. As you can see, the loss on the net trained with the distillation loss is lower than that of the net trained with a regular CE loss. 
 
-|lr|T|epochs|weight|0|1|2|3|4|5|6|7|8|9|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0.01|1.0|70|0.0|99.28%|98.59%|98.26%|98.81%|96.74%|95.29%|97.91%|97.86%|95.69%|97.03%|
-|0.01|2.5|70|0.9|99.29%|99.74%|99.13%|99.60%|99.19%|98.77%|99.27%|98.83%|98.97%|98.32%|
+|lr|T|epochs|weight|best_loss|0|1|2|3|4|5|6|7|8|9|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0.01|1.0|70|1.0|0.04663|99.39%|98.77%|97.77%|99.01%|97.56%|96.97%|97.7%|97.86%|96.2%|96.53%|
+|0.01|2.5|70|0.1|0.04606|99.49%|99.38%|98.84%|99.31%|99.19%|98.54%|99.06%|99.03%|99.28%|97.62%|
+
 
 ----
 
