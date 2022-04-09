@@ -11,7 +11,7 @@ This performance table is for a model trained on classes 0-5, tested on classes 
 As you can see above, the student model is able to learn how to classify images of a class that it did not see during training. Through these experiments, I have found that temperature values between 8-12 work the best for this task, along with a learning rate of 0.01 as 0.001 is too small.
 
 ---
-The below table shows the results for training the student network on all classes in MNIST (0-9). The first row represents a weight of 0 given to the soft-label loss term, which basically means a standard training loop for the student network using CE loss. The second row represents a student net trained on a mix of both the soft labels and hard labels using a temperature of 2.5. Both networks are trained with the same LR and epochs. As you can see, the loss on the net trained with the distillation loss is lower than that of the net trained with a regular CE loss. 
+The below table shows the results for training the student network on all classes in MNIST (0-9). The first row represents a weight of 0 given to the soft-label loss term, which basically means a standard training loop for the student network using CE loss. The second row represents a student net trained on a mix of both the soft labels and hard labels using a temperature of 2.5. Both networks are trained with the same LR and epochs. As you can see, the accuracies on the net trained with the distillation loss is lower than that of the net trained with a regular CE loss. 
 
 |lr|T|epochs|weight|best_loss|0|1|2|3|4|5|6|7|8|9|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
