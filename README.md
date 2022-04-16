@@ -1,3 +1,13 @@
+You can run experiments by doing: 
+
+```python grid_search.py <config_path> <weights_path>```
+
+For example:
+
+```python grid_search.py grid_search_configs/baseline.json weights/Teacher_network_val_loss0.00011```
+
+To create your own configs, see ```grid_search_configs/baseline.json``` for a reference. 
+
 ### Interesting results
 This performance table is for a model trained on classes 0-5, tested on classes 0-9. The student network (all dense layers), has the following architecture:
 
